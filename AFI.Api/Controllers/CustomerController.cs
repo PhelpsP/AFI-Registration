@@ -1,6 +1,6 @@
 ﻿using AFI.Api.Models;
 using AFI.Api.Resources;
-using AFI.Domain.Registration.Interfaces;
+using AFI.Application;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -18,7 +18,7 @@ namespace AFI.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] Customer inputDto)
+        public async Task<IActionResult> PostAsync([FromBody] Customer? inputDto)
         {
             if (inputDto == null)
             {
@@ -26,7 +26,16 @@ namespace AFI.Api.Controllers
             }
             try
             {
-                var result = await _service.RegisterCustomerAsync();
+                var dto = new CustomerDetailsDto
+                {
+                    PolicyholderFirstName = inputDto.PolicyholderFirstName,
+                    PolicyholderSurname = inputDto.PolicyholderSurname,
+                    PolicyReferenceNumber = inputDto.PolicyReferenceNumber,
+                    PolicyholderDOB = inputDto.PolicyholderDOB,
+                    PolicyholderEmail = inputDto.PolicyholderEmail,
+                };
+
+                var result = await _service.RegisterCustomerAsync(dto);
                 var response = new RegistrationResponse { CustomerId = result };
 
                 return Ok(response);

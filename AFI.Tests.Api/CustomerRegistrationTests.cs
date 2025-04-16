@@ -1,7 +1,7 @@
 ﻿using AFI.Api.Controllers;
 using AFI.Api.Models;
 using AFI.Api.Resources;
-using AFI.Domain.Registration.Interfaces;
+using AFI.Application;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.ComponentModel.DataAnnotations;
@@ -73,7 +73,9 @@ namespace AFI.Tests.Api
             };
 
             var mockCustomerRegistrationService = new Mock<ICustomerRegistrationService>();
-            mockCustomerRegistrationService.Setup(x => x.RegisterCustomerAsync()).ThrowsAsync(new ValidationException());
+            mockCustomerRegistrationService.Setup(
+                x => x.RegisterCustomerAsync(It.IsAny<CustomerDetailsDto>()))
+                .ThrowsAsync(new ValidationException());
 
             var target = new CustomerController(mockCustomerRegistrationService.Object);
             var result = await target.PostAsync(input);
@@ -98,7 +100,9 @@ namespace AFI.Tests.Api
             };
 
             var mockCustomerRegistrationService = new Mock<ICustomerRegistrationService>();
-            mockCustomerRegistrationService.Setup(x => x.RegisterCustomerAsync()).ThrowsAsync(new Exception());
+            mockCustomerRegistrationService.Setup(
+                x => x.RegisterCustomerAsync(It.IsAny<CustomerDetailsDto>()))
+                .ThrowsAsync(new Exception());
 
             var target = new CustomerController(mockCustomerRegistrationService.Object);
             var result = await target.PostAsync(input);
@@ -114,7 +118,7 @@ namespace AFI.Tests.Api
         private ICustomerRegistrationService GetExampleCustomerRegistrationServiceMock()
         {
             var customerRegistrationServiceMock = new Mock<ICustomerRegistrationService>();
-            customerRegistrationServiceMock.Setup(x => x.RegisterCustomerAsync()).ReturnsAsync(1);
+            customerRegistrationServiceMock.Setup(x => x.RegisterCustomerAsync(It.IsAny<CustomerDetailsDto>())).ReturnsAsync(1);
 
             return customerRegistrationServiceMock.Object;
         }
