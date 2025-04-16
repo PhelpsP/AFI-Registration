@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AFI.Application\AFI.Application.csproj" />
+    <ProjectReference Include="..\AFI.Data\AFI.Data.csproj" />
     <ProjectReference Include="..\AFI.Domain.Registration\AFI.Domain.Registration.csproj" />
   </ItemGroup>
 
