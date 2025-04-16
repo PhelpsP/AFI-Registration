@@ -1,4 +1,5 @@
 using AFI.Api;
+using AFI.Application;
 using AFI.Domain.Registration.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<ICustomerRegistrationService, CustomerRegistrationServiceStub>();
+builder.Services.AddScoped<ICustomerRegistrationService, CustomerRegistrationService>();
 
 var app = builder.Build();
 
