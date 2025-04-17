@@ -8,5 +8,6 @@ namespace AFI.Domain.Registration.Interfaces
 {
     public interface ICustomerRegistrationRepository : IRepository
     {
+        Task<Customer> RegisterCustomerAsync(Customer customer);
     }
 }

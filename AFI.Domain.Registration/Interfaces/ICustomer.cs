@@ -8,6 +8,6 @@ namespace AFI.Domain.Registration.Interfaces
 {
     public interface ICustomer
     {
-        void Register(ICustomerRegistrationRepository repository);
+
     }
 }

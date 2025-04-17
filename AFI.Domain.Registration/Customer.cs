@@ -26,6 +26,38 @@ namespace AFI.Domain.Registration
                 email);
         }
 
+        public static Customer CreateExisting(
+            int id,
+            string firstName,
+            string surname,
+            string policyReferenceNumber,
+            DateTime? dateOfBirth,
+            string? email)
+        {
+            return new Customer(id,  firstName, surname, policyReferenceNumber, dateOfBirth, email);
+        }
+
+        private Customer(
+            int id,
+            string firstName,
+            string surname,
+            string policyReferenceNumber,
+            DateTime? dateOfBirth,
+            string? email)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException($"Id is invalid, must be greater than 0.");
+            }
+         
+            CustomerId = id;
+            FirstName = firstName;
+            Surname = surname;
+            PolicyReferenceNumber = policyReferenceNumber;
+            DateOfBirth = dateOfBirth;
+            Email = email;
+        }
+
         private Customer(
             string firstName,
             string surname,
@@ -83,11 +115,6 @@ namespace AFI.Domain.Registration
         public DateTime? DateOfBirth { get; }
         
         public string? Email { get; }
-
-        public void Register(ICustomerRegistrationRepository repository)
-        {
-            CustomerId = 1;
-        }
 
         private bool IsOver18(DateTime? dateToCheck)
         {

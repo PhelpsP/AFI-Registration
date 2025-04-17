@@ -1,4 +1,5 @@
-﻿using AFI.Domain.Registration.Interfaces;
+﻿using AFI.Data.Sqlite;
+using AFI.Domain.Registration.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,19 @@ namespace AFI.Data.Repositories
 {
     public class RepositoryFactory : IRepositoryFactory
     {
-        public IRepository CreateRepository<T>()
+        private readonly CustomerRegistrationDbContext _dbContext;
+
+        public RepositoryFactory(CustomerRegistrationDbContext dbContext)
+        {
+            _dbContext = dbContext 
+                ?? throw new ArgumentNullException(nameof(dbContext));
+        }
+
+        public T? CreateRepository<T>() where T : class
         {
             if(typeof(T) == typeof(ICustomerRegistrationRepository))
             {
-                return new CustomerRegistrationRepository();
+                return new CustomerRegistrationRepositorySqlite(_dbContext) as T;
             }
 
             throw new InvalidOperationException(

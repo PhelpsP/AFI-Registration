@@ -241,5 +241,39 @@ namespace AFI.Tests.Domain.Registration
             Assert.AreEqual(dateOfBirth, actual.DateOfBirth);
             Assert.AreEqual(email, actual.Email);
         }
+
+        [TestMethod]
+        public void CreateExisting_ThrowsArgumentException_ForInvalidId()
+        {
+            int id = 0;
+            string firstName = "Barry";
+            string surname = "Valid";
+            string policyRefNum = "AA-123456";
+            DateTime? dateOfBirth = DateTime.Today.AddYears(-19);
+            string email = string.Empty;
+
+            Assert.ThrowsException<ArgumentException>(() => Customer.CreateExisting(id, firstName, surname, policyRefNum, dateOfBirth, email));
+        }
+
+        [TestMethod]
+        public void CreateExisting_ReturnsExistingCustomer()
+        {
+            int id = 101;
+            string firstName = "Barry";
+            string surname = "Valid";
+            string policyRefNum = "AA-123456";
+            DateTime? dateOfBirth = DateTime.Today.AddYears(-19);
+            string email = string.Empty;
+
+            var actual = Customer.CreateExisting(id, firstName, surname, policyRefNum, dateOfBirth, email);
+
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(id, actual.CustomerId);
+            Assert.AreEqual(firstName, actual.FirstName);
+            Assert.AreEqual(surname, actual.Surname);
+            Assert.AreEqual(policyRefNum, actual.PolicyReferenceNumber);
+            Assert.AreEqual(dateOfBirth, actual.DateOfBirth);
+            Assert.AreEqual(email, actual.Email);
+        }
     }
 }
