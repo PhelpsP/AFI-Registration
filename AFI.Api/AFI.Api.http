@@ -1,0 +1,6 @@
+@AFI.Api_HostAddress = http://localhost:5248
+
+GET {{AFI.Api_HostAddress}}/customer/
+Accept: application/json
+
+###

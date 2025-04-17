@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AFI.Data.Sqlite\AFI.Data.Sqlite.csproj" />
+    <ProjectReference Include="..\AFI.Domain.Registration\AFI.Domain.Registration.csproj" />
+  </ItemGroup>
+
+</Project>
