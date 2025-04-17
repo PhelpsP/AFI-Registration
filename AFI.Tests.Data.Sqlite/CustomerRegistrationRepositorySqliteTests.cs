@@ -1,5 +1,5 @@
-﻿using AFI.Data.Repositories;
-using AFI.Data.Sqlite;
+﻿using AFI.Data.Sqlite;
+using AFI.Data.Sqlite.Repositories;
 using AFI.Domain.Registration;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;

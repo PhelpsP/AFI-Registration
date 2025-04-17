@@ -1,5 +1,6 @@
 ﻿using AFI.Data.Repositories;
 using AFI.Data.Sqlite;
+using AFI.Data.Sqlite.Repositories;
 using AFI.Domain.Registration.Interfaces;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
@@ -46,9 +47,11 @@ namespace AFI.Tests.Data
         }
 
         [TestCleanup]
-        public void Cleanup() {
+        public void Cleanup()
+        {
             _context.Dispose();
             _connection.Close();
 
+        }
     }
 }

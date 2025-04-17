@@ -8,6 +8,6 @@ namespace AFI.Domain.Registration.Interfaces
 {
     public interface IRepositoryFactory
     {
-        IRepository CreateRepository<T>();
+        T? CreateRepository<T>() where T : class;
     }
 }

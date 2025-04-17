@@ -1,6 +1,6 @@
 ﻿namespace AFI.Api.Resources
 {
-    public class Customer
+    public class CustomerRegistrationRequestDto
     {
         public string PolicyholderFirstName { get; set; } = string.Empty;
 

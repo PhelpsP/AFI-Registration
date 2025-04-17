@@ -20,7 +20,7 @@ namespace AFI.Tests.Api
         [TestMethod]
         public async Task ValidPostRequestReturns200StatusCodeAndCustomerId()
         {
-            var input = new Customer
+            var input = new CustomerRegistrationRequestDto
             {
                 PolicyholderFirstName = "First",
                 PolicyholderSurname = "Last",
@@ -64,7 +64,7 @@ namespace AFI.Tests.Api
         [TestMethod]
         public async Task Post_KnownException_Returns400BadRequest()
         {
-            var input = new Customer
+            var input = new CustomerRegistrationRequestDto
             {
                 PolicyholderFirstName = "First",
                 PolicyholderSurname = "Last",
@@ -91,7 +91,7 @@ namespace AFI.Tests.Api
         [TestMethod]
         public async Task Post_UnexpectedException_Returns500()
         {
-            var input = new Customer
+            var input = new CustomerRegistrationRequestDto
             {
                 PolicyholderFirstName = "First",
                 PolicyholderSurname = "Last",

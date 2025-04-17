@@ -18,12 +18,13 @@ namespace AFI.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] Customer? inputDto)
+        public async Task<IActionResult> PostAsync([FromBody] CustomerRegistrationRequestDto? inputDto)
         {
             if (inputDto == null)
             {
                 return BadRequest("Invalid input");
             }
+
             try
             {
                 var dto = new CustomerDetailsDto

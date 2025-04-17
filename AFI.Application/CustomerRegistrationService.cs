@@ -13,9 +13,14 @@ namespace AFI.Application
                 ?? throw new ArgumentNullException(nameof(repositoryFactory));
         }
 
-        public Task<int> RegisterCustomerAsync(CustomerDetailsDto dto)
+        public async Task<int> RegisterCustomerAsync(CustomerDetailsDto dto)
         {
             var repository = _repositoryFactory.CreateRepository<ICustomerRegistrationRepository>();
+
+            if (repository == null)
+            {
+                throw new NullReferenceException(nameof(repository));
+            }
 
             var customer = Customer.CreateNew(
                 dto.PolicyholderFirstName,
@@ -24,9 +29,9 @@ namespace AFI.Application
                 dto.PolicyholderDOB,
                 dto.PolicyholderEmail);
 
-            customer.Register((ICustomerRegistrationRepository)repository);
+            var customerRecord = await repository.RegisterCustomerAsync(customer);
 
-            return Task.FromResult(customer.CustomerId);
+            return customerRecord.CustomerId;
         }
     }
 }

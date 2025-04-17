@@ -1,4 +1,5 @@
 ﻿using AFI.Data.Sqlite;
+using AFI.Data.Sqlite.Repositories;
 using AFI.Domain.Registration.Interfaces;
 using System;
 using System.Collections.Generic;

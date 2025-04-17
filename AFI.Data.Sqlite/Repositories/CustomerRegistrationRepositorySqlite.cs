@@ -3,7 +3,7 @@ using AFI.Data.Sqlite.Entities;
 using AFI.Domain.Registration;
 using AFI.Domain.Registration.Interfaces;
 
-namespace AFI.Data.Repositories
+namespace AFI.Data.Sqlite.Repositories
 {
     public class CustomerRegistrationRepositorySqlite : ICustomerRegistrationRepository
     {
