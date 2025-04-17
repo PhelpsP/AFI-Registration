@@ -41,7 +41,7 @@ namespace AFI.Api.Controllers
 
                 return Ok(response);
             }
-            catch (ValidationException ex)
+            catch (ArgumentException ex)
             {
                 return BadRequest(ex.Message);
             }

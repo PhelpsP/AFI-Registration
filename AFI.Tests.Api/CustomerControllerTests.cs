@@ -75,7 +75,7 @@ namespace AFI.Tests.Api
             var mockCustomerRegistrationService = new Mock<ICustomerRegistrationService>();
             mockCustomerRegistrationService.Setup(
                 x => x.RegisterCustomerAsync(It.IsAny<CustomerDetailsDto>()))
-                .ThrowsAsync(new ValidationException());
+                .ThrowsAsync(new ArgumentException());
 
             var target = new CustomerController(mockCustomerRegistrationService.Object);
             var result = await target.PostAsync(input);

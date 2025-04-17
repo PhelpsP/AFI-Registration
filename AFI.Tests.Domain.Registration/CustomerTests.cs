@@ -7,127 +7,127 @@ namespace AFI.Tests.Domain.Registration
     public sealed class CustomerTests
     {
         [TestMethod]
-        public void CreateNew_ThrowsValidationException_WhenFirstNameIsToShort()
+        public void CreateNew_ThrowsArgumentException_WhenFirstNameIsToShort()
         {
             string firstName = "Di";
             string surname = "Valid";
             string referenceNumber = "XX-999999";
             DateTime? dateOfBirth = DateTime.Today.AddYears(-19);
 
-            Assert.ThrowsException<ValidationException>(
+            Assert.ThrowsException<ArgumentException>(
                 () => Customer.CreateNew(firstName, surname, referenceNumber, dateOfBirth, string.Empty));
         }
 
         [TestMethod]
-        public void CreateNew_ThrowsValidationException_WhenFirstNameIsToLong()
+        public void CreateNew_ThrowsArgumentException_WhenFirstNameIsToLong()
         {
             string firstName = new string('a', 51);
             string surname = "Valid";
             string referenceNumber = "XX-999999";
             DateTime? dateOfBirth = DateTime.Today.AddYears(-19);
 
-            Assert.ThrowsException<ValidationException>(
+            Assert.ThrowsException<ArgumentException>(
                 () => Customer.CreateNew(firstName, surname, referenceNumber, dateOfBirth, string.Empty));
         }
 
         [TestMethod]
-        public void CreateNew_ThrowsValidationException_WhenSurnameIsToShort()
+        public void CreateNew_ThrowsArgumentException_WhenSurnameIsToShort()
         {
             string firstName = "Valid";
             string surname = "No";
             string referenceNumber = "XX-999999";
             DateTime? dateOfBirth = DateTime.Today.AddYears(-19);
 
-            Assert.ThrowsException<ValidationException>(
+            Assert.ThrowsException<ArgumentException>(
                 () => Customer.CreateNew(firstName, surname, referenceNumber, dateOfBirth, string.Empty));
         }
 
         [TestMethod]
-        public void CreateNew_ThrowsValidationException_WhenSurnameIsToLong()
+        public void CreateNew_ThrowsArgumentException_WhenSurnameIsToLong()
         {
             string firstName = "Valid";
             string surname = new string('b', 51);
             string referenceNumber = "XX-999999";
             DateTime? dateOfBirth = DateTime.Today.AddYears(-19);
 
-            Assert.ThrowsException<ValidationException>(
+            Assert.ThrowsException<ArgumentException>(
                 () => Customer.CreateNew(firstName, surname, referenceNumber, dateOfBirth, string.Empty));
         }
 
         [TestMethod]
-        public void CreateNew_ThrowsValidationException_WhenPolicyReferenceNumberIsInvalidFormat_Not2AlphaCharacters()
+        public void CreateNew_ThrowsArgumentException_WhenPolicyReferenceNumberIsInvalidFormat_Not2AlphaCharacters()
         {
             string firstName = new string('a', 15);
             string surname = "Valid";
             string referenceNumber = "X2-999999";
             DateTime? dateOfBirth = DateTime.Today.AddYears(-19);
 
-            Assert.ThrowsException<ValidationException>(
+            Assert.ThrowsException<ArgumentException>(
                 () => Customer.CreateNew(firstName, surname, referenceNumber, dateOfBirth, string.Empty));
         }
 
         [TestMethod]
-        public void CreateNew_ThrowsValidationException_WhenPolicyReferenceNumberIsInvalidFormat_1AlphaCharacter()
+        public void CreateNew_ThrowsArgumentException_WhenPolicyReferenceNumberIsInvalidFormat_1AlphaCharacter()
         {
             string firstName = new string('a', 15);
             string surname = "Valid";
             string referenceNumber = "X-999999";
             DateTime? dateOfBirth = DateTime.Today.AddYears(-19);
 
-            Assert.ThrowsException<ValidationException>(
+            Assert.ThrowsException<ArgumentException>(
                 () => Customer.CreateNew(firstName, surname, referenceNumber, dateOfBirth, string.Empty));
         }
 
         [TestMethod]
-        public void CreateNew_ThrowsValidationException_WhenPolicyReferenceNumberIsInvalidFormat_LowerCaseAlphaCharacters()
+        public void CreateNew_ThrowsArgumentException_WhenPolicyReferenceNumberIsInvalidFormat_LowerCaseAlphaCharacters()
         {
             string firstName = new string('a', 15);
             string surname = "Valid";
             string referenceNumber = "ab-999999";
             DateTime? dateOfBirth = DateTime.Today.AddYears(-19);
 
-            Assert.ThrowsException<ValidationException>(
+            Assert.ThrowsException<ArgumentException>(
                 () => Customer.CreateNew(firstName, surname, referenceNumber, dateOfBirth, string.Empty));
         }
 
         [TestMethod]
-        public void CreateNew_ThrowsValidationException_WhenPolicyReferenceNumberIsInvalidFormat_Not6NumericCharacters()
+        public void CreateNew_ThrowsArgumentException_WhenPolicyReferenceNumberIsInvalidFormat_Not6NumericCharacters()
         {
             string firstName = new string('a', 15);
             string surname = "Valid";
             string referenceNumber = "AB-12345";
             DateTime? dateOfBirth = DateTime.Today.AddYears(-19);
 
-            Assert.ThrowsException<ValidationException>(
+            Assert.ThrowsException<ArgumentException>(
                 () => Customer.CreateNew(firstName, surname, referenceNumber, dateOfBirth, string.Empty));
         }
 
         [TestMethod]
-        public void CreateNew_ThrowsValidationException_WhenPolicyReferenceNumberIsInvalidFormat_Last6WithAlphaChar()
+        public void CreateNew_ThrowsArgumentException_WhenPolicyReferenceNumberIsInvalidFormat_Last6WithAlphaChar()
         {
             string firstName = new string('a', 15);
             string surname = "Valid";
             string referenceNumber = "CC-999Z99";
             DateTime? dateOfBirth = DateTime.Today.AddYears(-19);
 
-            Assert.ThrowsException<ValidationException>(
+            Assert.ThrowsException<ArgumentException>(
                 () => Customer.CreateNew(firstName, surname, referenceNumber, dateOfBirth, string.Empty));
         }
 
         [TestMethod]
-        public void CreateNew_ThrowsValidationException_WhenPolicyReferenceNumberIsInvalidFormat_NoHyphen()
+        public void CreateNew_ThrowsArgumentException_WhenPolicyReferenceNumberIsInvalidFormat_NoHyphen()
         {
             string firstName = new string('a', 15);
             string surname = "Valid";
             string referenceNumber = "AB123456";
             DateTime? dateOfBirth = DateTime.Today.AddYears(-19);
 
-            Assert.ThrowsException<ValidationException>(
+            Assert.ThrowsException<ArgumentException>(
                 () => Customer.CreateNew(firstName, surname, referenceNumber, dateOfBirth, string.Empty));
         }
 
         [TestMethod]
-        public void CreateNew_ThrowsValidationException_WhereNoEmailOrDateOfBirthProvided()
+        public void CreateNew_ThrowsArgumentNullException_WhereNoEmailOrDateOfBirthProvided()
         {
             string firstName = "Barry";
             string surname = "Valid";
@@ -135,12 +135,12 @@ namespace AFI.Tests.Domain.Registration
             DateTime? dateOfBirth = null;
             string email = string.Empty;
 
-            Assert.ThrowsException<ValidationException>(
+            Assert.ThrowsException<ArgumentNullException>(
                 () => Customer.CreateNew(firstName, surname, policyRefNum, dateOfBirth, email));
         }
 
         [TestMethod]
-        public void CreateNew_ThrowsValidationException_ForSeventeenYearOldToday()
+        public void CreateNew_ThrowsArgumentException_ForSeventeenYearOldToday()
         {
             string firstName = "Barry";
             string surname = "Valid";
@@ -148,7 +148,7 @@ namespace AFI.Tests.Domain.Registration
             DateTime? dateOfBirth = DateTime.Today.AddDays(1).AddYears(-18); 
             string email = string.Empty;
 
-            Assert.ThrowsException<ValidationException>(
+            Assert.ThrowsException<ArgumentException>(
                 () => Customer.CreateNew(firstName, surname, policyRefNum, dateOfBirth, email));
         }
 
@@ -172,7 +172,7 @@ namespace AFI.Tests.Domain.Registration
         }
 
         [TestMethod]
-        public void CreateNew_ThrowsValidationException_ForLessThan4AlphaNumbericCharsBeforeEmailAtSymbol()
+        public void CreateNew_ThrowsArgumentException_ForLessThan4AlphaNumbericCharsBeforeEmailAtSymbol()
         {
             string firstName = "Barry";
             string surname = "Valid";
@@ -180,12 +180,12 @@ namespace AFI.Tests.Domain.Registration
             DateTime? dateOfBirth = null;
             string email = "tes@test.co.uk";
 
-            Assert.ThrowsException<ValidationException>(
+            Assert.ThrowsException<ArgumentException>(
                 () => Customer.CreateNew(firstName, surname, policyRefNum, dateOfBirth, email));
         }
 
         [TestMethod]
-        public void CreateNew_ThrowsValidationException_ForNoAtSymbol()
+        public void CreateNew_ThrowsArgumentException_ForNoAtSymbol()
         {
             string firstName = "Barry";
             string surname = "Valid";
@@ -193,12 +193,12 @@ namespace AFI.Tests.Domain.Registration
             DateTime? dateOfBirth = null;
             string email = "testtest.co.uk";
 
-            Assert.ThrowsException<ValidationException>(
+            Assert.ThrowsException<ArgumentException>(
                 () => Customer.CreateNew(firstName, surname, policyRefNum, dateOfBirth, email));
         }
 
         [TestMethod]
-        public void CreateNew_ThrowsValidationException_ForLessThan2AlphaNumbericCharsAfterEmailAtSymbol()
+        public void CreateNew_ThrowsArgumentException_ForLessThan2AlphaNumbericCharsAfterEmailAtSymbol()
         {
             string firstName = "Barry";
             string surname = "Valid";
@@ -206,12 +206,12 @@ namespace AFI.Tests.Domain.Registration
             DateTime? dateOfBirth = null;
             string email = "test@t.co.uk";
 
-            Assert.ThrowsException<ValidationException>(
+            Assert.ThrowsException<ArgumentException>(
                 () => Customer.CreateNew(firstName, surname, policyRefNum, dateOfBirth, email));
         }
 
         [TestMethod]
-        public void CreateNew_ThrowsValidationException_ForEndingNotComOrCoDotyUk()
+        public void CreateNew_ThrowsArgumentException_ForEndingNotComOrCoDotyUk()
         {
             string firstName = "Barry";
             string surname = "Valid";
@@ -219,7 +219,7 @@ namespace AFI.Tests.Domain.Registration
             DateTime? dateOfBirth = null;
             string email = "tes@test.net";
 
-            Assert.ThrowsException<ValidationException>(
+            Assert.ThrowsException<ArgumentException>(
                 () => Customer.CreateNew(firstName, surname, policyRefNum, dateOfBirth, email));
         }
 
