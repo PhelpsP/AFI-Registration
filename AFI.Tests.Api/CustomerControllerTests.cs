@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 namespace AFI.Tests.Api
 {
     [TestClass]
-    public sealed class CustomerRegistrationTests
+    public sealed class CustomerControllerTests
     {
         [TestMethod]
         public void ConstructorThrowsArgumentNullExceptionForNullCustomerRegistrationService()
