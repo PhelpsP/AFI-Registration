@@ -94,7 +94,7 @@ namespace AFI.Domain.Registration
             FirstName = firstName;
             Surname = surname;
             PolicyReferenceNumber = policyReferenceNumber;
-            DateOfBirth = dateOfBirth;
+            DateOfBirth = dateOfBirth?.Date;
             Email = email;
         }
 
@@ -114,7 +114,7 @@ namespace AFI.Domain.Registration
         {
             DateTime eighteenYearsAgoToday = DateTime.Today.AddYears(-18);
 
-            return dateToCheck <= eighteenYearsAgoToday;
+            return dateToCheck?.Date <= eighteenYearsAgoToday;
         }
     }
 }

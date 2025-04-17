@@ -172,6 +172,26 @@ namespace AFI.Tests.Domain.Registration
         }
 
         [TestMethod]
+        public void CreateNew_ReturnsCustomer_ForEighteenYearOldTodayWithTimeIncluded()
+        {
+            string firstName = "Barry";
+            string surname = "Valid";
+            string policyRefNum = "AA-123456";
+            DateTime? dateOfBirth = DateTime.Now.AddYears(-18);
+            DateTime? expectedDateOfBirth = dateOfBirth?.Date;
+            string email = string.Empty;
+
+            var actual = Customer.CreateNew(firstName, surname, policyRefNum, dateOfBirth, email);
+
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(firstName, actual.FirstName);
+            Assert.AreEqual(surname, actual.Surname);
+            Assert.AreEqual(policyRefNum, actual.PolicyReferenceNumber);
+            Assert.AreEqual(expectedDateOfBirth, actual.DateOfBirth);
+            Assert.AreEqual(email, actual.Email);
+        }
+
+        [TestMethod]
         public void CreateNew_ThrowsArgumentException_ForLessThan4AlphaNumbericCharsBeforeEmailAtSymbol()
         {
             string firstName = "Barry";
